@@ -1,3 +1,4 @@
+
 let textoLista = ["1-texto.txt", "2-texto.txt", "3-texto.txt", "4-texto.txt"];
 let textoElegido;
 let textoVisible;
@@ -14,17 +15,16 @@ let isHovering = false;
 function preload() 
 {
     cargarTextoAleatorio();
-    cargarImagenAleatoria();
+    cargarImagenAleatoria();   
 }
 
 function setup() 
 {
     frameRate(5);
     canvas = createCanvas(windowWidth, windowHeight);
-    textFont("Courier-Light");
     
     camara = createCapture(VIDEO);
-    camara.size(100, 100);
+    camara.size(100, 50);
     camara.hide();
 
     canvas.mouseOver(() => 
@@ -76,8 +76,10 @@ function muestra_ASCII_Imagenes() {
 
     imgVisible.loadPixels();
 
-    for (let j = 0; j < imgVisible.height; j++) {
-        for (let i = 0; i < imgVisible.width; i++) {
+    for (let j = 0; j < imgVisible.height; j++) 
+    {
+        for (let i = 0; i < imgVisible.width; i++)
+        {
             const pixelIndex = (i + j * imgVisible.width) * 4;
             const r = imgVisible.pixels[pixelIndex + 0];
             const g = imgVisible.pixels[pixelIndex + 1];
@@ -99,24 +101,24 @@ function muestra_ASCII_Video()
     clear();
     background(0);
     camara.loadPixels();
-
-    let w = width / camara.width;
-    let h = height / camara.height;
+    
+    let w = width/camara.width;
+    let h = height/camara.height;
     let charIndex = startIndex;
-
-    for (let j = 0; j < camara.height; j++) {
-        for (let i = 0; i < camara.width; i++) {
+    
+    for (let j = 0; j < camara.height; j++)
+    {
+        for (let i = 0; i < camara.width; i++)
+        {
             const pixelIndex = (i + j * camara.width) * 4;
             const r = camara.pixels[pixelIndex + 0];
             const g = camara.pixels[pixelIndex + 1];
             const b = camara.pixels[pixelIndex + 2];
-            avg = (r+g+b)/3;
+            const avg = (r + g + b)/3;
             fill(avg);
-            noStroke();
-            textSize(w * 1);
+            textSize(w * 1.2);
             textAlign(CENTER, CENTER);
-            let charToDisplay = textoVisible.charAt(charIndex % textoVisible.length);
-            text(charToDisplay, i * w + w * 0.5, j * h + h * 0.5);
+            text(textoVisible.charAt(charIndex % textoVisible.length), i * w + w * 0.5, j * h + h * 0.5);
             charIndex++;
         }
     }
